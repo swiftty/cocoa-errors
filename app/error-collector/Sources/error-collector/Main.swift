@@ -12,49 +12,57 @@ struct Main: AsyncParsableCommand {
     @Option(
         name: .customLong("path"),
         help: "path to Xcode.app.",
-        transform: { path in
-            URL(fileURLWithPath: path)
-                .appendingPathComponent("Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks")
-        }
+        transform: URL.init(fileURLWithPath:)
     )
-    var frameworks: URL
-
-    @Flag(
-        name: .customLong("pretty-print"),
-        help: "output json with pritty print."
-    )
-    var isPrettyPrint: Bool = false
+    var xcodePath: URL
 
     @Option(
         name: [.customLong("output"), .customShort("o")],
         help: "path to output json file.",
-        transform: { path in
-            URL(fileURLWithPath: path)
-        }
+        transform: URL.init(fileURLWithPath:)
     )
     var outputPath: URL?
 
+    @Flag(
+        name: .customLong("pretty-print"),
+        help: "output json with pritty printed."
+    )
+    var isPrettyPrint: Bool = false
+
     private var fileManager: FileManager { .default }
 
+    private var platforms: [URL] {
+        let platforms = xcodePath
+            .appendingPathComponent("Contents/Developer/Platforms")
+        return [
+            platforms
+                .appendingPathComponent("MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"),
+            platforms
+                .appendingPathComponent("iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks")
+        ]
+    }
+
     func validate() throws {
-        if !fileManager.fileExists(atPath: frameworks.path) {
-            throw ValidationError("framework directory not found. \(frameworks.path)")
+        for url in platforms {
+            if !fileManager.fileExists(atPath: url.path) {
+                throw ValidationError("framework directory not found. \(url.path)")
+            }
         }
     }
 
     func run() async throws {
-        var results: [ErrorCodes] = []
+        var results: Set<ErrorCodes> = []
 
-        for item in try fileManager
-            .contentsOfDirectory(at: frameworks, includingPropertiesForKeys: [])
-            .sorted(by: URLByName)
-        {
-            results.append(contentsOf: try findErrorCodes(inFrameworks: item))
+        for frameworks in platforms {
+            let dirs = try fileManager.contentsOfDirectory(at: frameworks, includingPropertiesForKeys: [])
+            for item in dirs {
+                results.formUnion(try findErrorCodes(inFrameworks: item))
+            }
         }
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, isPrettyPrint ? .prettyPrinted : []]
-        let data = try encoder.encode(results)
+        let data = try encoder.encode(results.sorted(by: { $0.module < $1.module || $0.domain < $1.domain }))
         let json = String(data: data, encoding: .utf8) ?? ""
 
         if let outputPath {
@@ -71,13 +79,12 @@ struct Main: AsyncParsableCommand {
         var results: [ErrorCodes] = []
         headers = headers
             .deletingLastPathComponent()
-            .appendingPathComponent(try fileManager.destinationOfSymbolicLink(atPath: headers.path))
-        for item in try fileManager
-            .contentsOfDirectory(at: headers, includingPropertiesForKeys: [])
-            .sorted(by: URLByName)
-        where item.lastPathComponent.hasSuffix(".h")
-        {
-            results.append(contentsOf: try findErrorCodes(inFile: item, at: path.deletingPathExtension().lastPathComponent))
+            .appendingPathComponent((try? fileManager.destinationOfSymbolicLink(atPath: headers.path)) ?? "Headers")
+
+        let moduleName = path.deletingPathExtension().lastPathComponent
+        let items = try fileManager.contentsOfDirectory(at: headers, includingPropertiesForKeys: [])
+        for item in items where item.lastPathComponent.hasSuffix(".h") {
+            results.append(contentsOf: try findErrorCodes(inFile: item, at: moduleName))
         }
         return results
     }

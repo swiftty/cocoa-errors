@@ -1,22 +1,23 @@
 import Foundation
 
-struct ErrorCodes: Encodable {
-    struct Code: Encodable {
+struct ErrorCodes: Encodable, Hashable {
+    struct Code: Encodable, Hashable {
         var name: String
         var value: Value
         var unspecified: Bool?
         var sameAs: String?
 
-        enum Value: Encodable {
+        enum Value: Encodable, Hashable {
             case int(Int)
             case string(String)
+            case constant(String)
 
             func encode(to encoder: Encoder) throws {
                 switch self {
                 case .int(let val):
                     try val.encode(to: encoder)
 
-                case .string(let val):
+                case .string(let val), .constant(let val):
                     try val.encode(to: encoder)
                 }
             }
@@ -25,6 +26,13 @@ struct ErrorCodes: Encodable {
     var module: String
     var domain: String
     var codes: [Code]
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        let same = lhs.domain == rhs.domain
+        precondition(same == (lhs.codes == rhs.codes),
+                     "\(lhs.codes.map(\.name)) not equals \(rhs.codes.map(\.name))")
+        return same
+    }
 }
 
 extension ErrorCodes {
@@ -65,7 +73,7 @@ extension ErrorCodes.Code {
             func toInt(_ code: Self?) -> Int? {
                 switch code?.value {
                 case .int(let value): return value
-                case .string: return nil
+                case .string, .constant: return nil
                 case nil: return nil
                 }
             }
@@ -77,14 +85,24 @@ extension ErrorCodes.Code {
             return .init(name: name, value: found.value, sameAs: found.name)
         }
 
+        let constants = [
+            "NSIntegerMax": "int"
+        ]
         let intValue = Int(value)
+        let isIntValue = intValue != nil || constants[value] == "int"
         assert(previous.allSatisfy({ code in
             switch code.value {
-            case .int: return intValue != nil
-            case .string: return intValue == nil
+            case .int: return isIntValue
+            case .string: return !isIntValue
+            case .constant: return true
             }
         }))
-        return .init(name: name, value: intValue.map(Value.int) ?? .string(value))
+        return .init(
+            name: name,
+            value: (constants.keys.contains(value)
+                    ? .constant(value)
+                    : intValue.map(Value.int) ?? .string(value))
+        )
     }
 }
 
