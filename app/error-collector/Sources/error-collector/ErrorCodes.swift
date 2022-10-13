@@ -10,14 +10,13 @@ struct ErrorCodes: Encodable, Hashable {
         enum Value: Encodable, Hashable {
             case int(Int)
             case string(String)
-            case constant(String)
 
             func encode(to encoder: Encoder) throws {
                 switch self {
                 case .int(let val):
                     try val.encode(to: encoder)
 
-                case .string(let val), .constant(let val):
+                case .string(let val):
                     try val.encode(to: encoder)
                 }
             }
@@ -69,7 +68,7 @@ extension ErrorCodes.Code {
             func toInt(_ code: Self?) -> Int? {
                 switch code?.value {
                 case .int(let value): return value
-                case .string, .constant: return nil
+                case .string: return nil
                 case nil: return nil
                 }
             }
@@ -81,23 +80,21 @@ extension ErrorCodes.Code {
             return .init(name: name, value: found.value, sameAs: found.name)
         }
 
-        let constants = [
-            "NSIntegerMax": "int"
+        let constants: [String: Any] = [
+            "NSIntegerMax": NSIntegerMax
         ]
         let intValue = Int(value)
-        let isIntValue = intValue != nil || constants[value] == "int"
+        let isIntValue = intValue != nil || constants[value] is Int
         assert(previous.allSatisfy({ code in
             switch code.value {
             case .int: return isIntValue
             case .string: return !isIntValue
-            case .constant: return true
             }
         }))
         return .init(
             name: name,
-            value: (constants.keys.contains(value)
-                    ? .constant(value)
-                    : intValue.map(Value.int) ?? .string(value))
+            value: (constants[value] as? Int ?? intValue).map(Value.int) ?? .string(value),
+            sameAs: constants.keys.contains(value) ? value : nil
         )
     }
 }
