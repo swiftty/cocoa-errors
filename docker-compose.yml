@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  react-app:
+    build: ./
+    volumes:
+      - ./app:/app
+    command: sh -c "cd react-app && yarn start"
+    ports:
+      - "3000:3000"
+    stdin_open: true
