@@ -4,19 +4,19 @@ struct ErrorCodes: Encodable {
     struct Code: Encodable {
         var name: String
         var value: Value
-        var unspecified: Bool
+        var unspecified: Bool?
+        var sameAs: String?
 
         enum Value: Encodable {
             case int(Int)
             case string(String)
-            case same(as: String)
 
             func encode(to encoder: Encoder) throws {
                 switch self {
                 case .int(let val):
                     try val.encode(to: encoder)
 
-                case .string(let val), .same(as: let val):
+                case .string(let val):
                     try val.encode(to: encoder)
                 }
             }
@@ -66,7 +66,6 @@ extension ErrorCodes.Code {
                 switch code?.value {
                 case .int(let value): return value
                 case .string: return nil
-                case .same(as: let name): return toInt(previous.first(where: { $0.name == name }))
                 case nil: return nil
                 }
             }
@@ -75,7 +74,7 @@ extension ErrorCodes.Code {
         }
 
         if let found = previous.first(where: { $0.name == value }) {
-            return .init(name: name, value: .same(as: found.name), unspecified: false)
+            return .init(name: name, value: found.value, sameAs: found.name)
         }
 
         let intValue = Int(value)
@@ -83,10 +82,9 @@ extension ErrorCodes.Code {
             switch code.value {
             case .int: return intValue != nil
             case .string: return intValue == nil
-            case .same: return true
             }
         }))
-        return .init(name: name, value: intValue.map(Value.int) ?? .string(value), unspecified: false)
+        return .init(name: name, value: intValue.map(Value.int) ?? .string(value))
     }
 }
 

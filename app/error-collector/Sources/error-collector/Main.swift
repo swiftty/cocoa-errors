@@ -19,6 +19,21 @@ struct Main: AsyncParsableCommand {
     )
     var frameworks: URL
 
+    @Flag(
+        name: .customLong("pretty-print"),
+        help: "output json with pritty print."
+    )
+    var isPrettyPrint: Bool = false
+
+    @Option(
+        name: [.customLong("output"), .customShort("o")],
+        help: "path to output json file.",
+        transform: { path in
+            URL(fileURLWithPath: path)
+        }
+    )
+    var outputPath: URL?
+
     private var fileManager: FileManager { .default }
 
     func validate() throws {
@@ -38,10 +53,15 @@ struct Main: AsyncParsableCommand {
         }
 
         let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        encoder.outputFormatting = [.sortedKeys, isPrettyPrint ? .prettyPrinted : []]
         let data = try encoder.encode(results)
         let json = String(data: data, encoding: .utf8) ?? ""
-        print(json)
+
+        if let outputPath {
+            try json.write(to: outputPath, atomically: true, encoding: .utf8)
+        } else {
+            print(json)
+        }
     }
 
     private func findErrorCodes(inFrameworks path: URL) throws -> [ErrorCodes] {
@@ -57,7 +77,7 @@ struct Main: AsyncParsableCommand {
             .sorted(by: URLByName)
         where item.lastPathComponent.hasSuffix(".h")
         {
-            results.append(contentsOf: try findErrorCodes(inFile: item, at: path.lastPathComponent))
+            results.append(contentsOf: try findErrorCodes(inFile: item, at: path.deletingPathExtension().lastPathComponent))
         }
         return results
     }
