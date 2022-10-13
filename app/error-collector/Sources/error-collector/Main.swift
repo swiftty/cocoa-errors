@@ -100,14 +100,10 @@ struct Main: AsyncParsableCommand {
         }
         let matches = enumRegex.matches(in: contents, range: contents.nsRange)
 
-        func substring(_ range: NSRange) -> String {
-            contents[Range(range, in: contents)!].trimmingCharacters(in: .whitespacesAndNewlines)
-        }
-
         var results: [ErrorCodes] = []
         for match in matches {
-            let domain = substring(match.range(withName: "domain"))
-            let codes = substring(match.range(withName: "codes"))
+            let domain = contents.substring(match.range(withName: "domain"))
+            let codes = contents.substring(match.range(withName: "codes"))
             if domain.contains("MyErrorDomain") {
                 // sample code
                 continue

@@ -57,18 +57,14 @@ extension ErrorCodes.Code {
             fatalError("regex failure: \(rawCode)")
         }
 
-        func substring(_ range: NSRange) -> String {
-            rawCode[Range(range, in: rawCode)!].trimmingCharacters(in: .whitespacesAndNewlines)
-        }
-
-        let name = substring(match.range(withName: "name"))
+        let name = rawCode.substring(match.range(withName: "name"))
         if name.hasSuffix("ErrorMinimum") || name.hasSuffix("ErrorMaximum") {
             // skip error boundaries enum case
             return nil
         }
 
         let valueRange = match.range(withName: "value")
-        guard let value = valueRange.location != NSNotFound ? substring(valueRange) : nil else {
+        guard let value = valueRange.location != NSNotFound ? rawCode.substring(valueRange) : nil else {
             // int (auto-increment)
             func toInt(_ code: Self?) -> Int? {
                 switch code?.value {
