@@ -1,11 +1,7 @@
 import Foundation
 import ArgumentParser
 
-private func URLByName(_ lhs: URL, _ rhs: URL) -> Bool {
-    lhs.lastPathComponent < rhs.lastPathComponent
-}
-
-let enumRegex = try! NSRegularExpression(pattern: "NS_ERROR_ENUM\\((?<domain>[a-zA-Z,\\s]+)\\)\\s+\\{(?<codes>[^}]+)\\}")
+private let enumRegex = try! NSRegularExpression(pattern: "NS_ERROR_ENUM\\((?<domain>[a-zA-Z,\\s]+)\\)\\s+\\{(?<codes>[^}]+)\\}")
 
 @main
 struct Main: AsyncParsableCommand {
@@ -42,6 +38,11 @@ struct Main: AsyncParsableCommand {
         ]
     }
 
+    struct JSON: Encodable {
+        var version: Version
+        var errors: [ErrorDefinition]
+    }
+
     func validate() throws {
         for url in platforms {
             if !fileManager.fileExists(atPath: url.path) {
@@ -51,17 +52,20 @@ struct Main: AsyncParsableCommand {
     }
 
     func run() async throws {
-        let results = try collectErrorDefinitions()
+        let json = JSON(
+            version: try .from(at: xcodePath),
+            errors: try collectErrorDefinitions()
+        )
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, isPrettyPrint ? .prettyPrinted : []]
-        let data = try encoder.encode(results)
-        let json = String(data: data, encoding: .utf8) ?? ""
+        let data = try encoder.encode(json)
+        let string = String(data: data, encoding: .utf8) ?? ""
 
         if let outputPath {
-            try json.write(to: outputPath, atomically: true, encoding: .utf8)
+            try string.write(to: outputPath, atomically: true, encoding: .utf8)
         } else {
-            print(json)
+            print(string)
         }
     }
 
@@ -76,7 +80,7 @@ struct Main: AsyncParsableCommand {
             }
         }
 
-        return results.sorted(by: { $0.module < $1.module || $0.domain < $1.domain })
+        return results.sorted(by: { ($0.module, $0.domain) < ($1.module, $1.domain) })
     }
 
     private func findErrorDefinitions(inFrameworks path: URL) throws -> [ErrorDefinition] {
