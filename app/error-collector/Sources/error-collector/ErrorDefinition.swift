@@ -28,10 +28,7 @@ struct ErrorDefinition: Encodable, Hashable {
     var codes: [Code]
 
     static func == (lhs: Self, rhs: Self) -> Bool {
-        let same = lhs.domain == rhs.domain
-        precondition(same == (lhs.codes == rhs.codes),
-                     "\(lhs.codes.map(\.name)) not equals \(rhs.codes.map(\.name))")
-        return same
+        lhs.domain == rhs.domain
     }
 }
 

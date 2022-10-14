@@ -71,16 +71,27 @@ struct Main: AsyncParsableCommand {
 
     // MARK: - private
     private func collectErrorDefinitions() throws -> [ErrorDefinition] {
-        var results: Set<ErrorDefinition> = []
+        var results: [String: ErrorDefinition] = [:]
 
         for frameworks in platforms {
             let dirs = try fileManager.contentsOfDirectory(at: frameworks, includingPropertiesForKeys: [])
             for item in dirs {
-                results.formUnion(try findErrorDefinitions(inFrameworks: item))
+                for def in try findErrorDefinitions(inFrameworks: item) {
+                    if let old = results[def.domain] {
+                        if old.codes != def.codes {
+                            print("in domain: \(def.domain), \(old.codes.map(\.name)) not equals \(def.codes.map(\.name))\n")
+                        } else if old.codes.count < def.codes.count {
+                            // override by a greater number of codes definitions
+                            results[def.domain] = def
+                        }
+                    } else {
+                        results[def.domain] = def
+                    }
+                }
             }
         }
 
-        return results.sorted(by: { ($0.module, $0.domain) < ($1.module, $1.domain) })
+        return results.values.sorted(by: { ($0.module, $0.domain) < ($1.module, $1.domain) })
     }
 
     private func findErrorDefinitions(inFrameworks path: URL) throws -> [ErrorDefinition] {
