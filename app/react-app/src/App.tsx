@@ -1,10 +1,19 @@
 import React from 'react';
+import ga4 from 'react-ga4';
 import Errors from './errors.json';
 import './App.css';
 import { MantineProvider, Text, TextInput, createStyles } from '@mantine/core';
 import { useDebouncedValue, useInputState } from '@mantine/hooks';
 import Table from './components/Table/Table';
 import { Footer } from './components/Footer/Footer';
+
+const isProduction = process.env.NODE_ENV === 'production';
+if (isProduction) {
+  const gaId = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
+  if (typeof gaId === 'string') {
+    ga4.initialize(gaId);
+  }
+}
 
 function App() {
   return (

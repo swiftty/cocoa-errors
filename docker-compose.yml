@@ -4,7 +4,7 @@ services:
     build: ./
     volumes:
       - ./app:/app
-    command: sh -c "cd react-app && yarn start"
+    command: sh -c "cd react-app && npm run start"
     ports:
       - "3000:3000"
     stdin_open: true
