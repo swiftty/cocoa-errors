@@ -51,7 +51,7 @@ struct Main: AsyncParsableCommand {
     }
 
     func run() async throws {
-        let results = try collectErrorCodes()
+        let results = try collectErrorDefinitions()
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, isPrettyPrint ? .prettyPrinted : []]
@@ -65,25 +65,26 @@ struct Main: AsyncParsableCommand {
         }
     }
 
-    private func collectErrorCodes() throws -> [ErrorCodes] {
-        var results: Set<ErrorCodes> = []
+    // MARK: - private
+    private func collectErrorDefinitions() throws -> [ErrorDefinition] {
+        var results: Set<ErrorDefinition> = []
 
         for frameworks in platforms {
             let dirs = try fileManager.contentsOfDirectory(at: frameworks, includingPropertiesForKeys: [])
             for item in dirs {
-                results.formUnion(try findErrorCodes(inFrameworks: item))
+                results.formUnion(try findErrorDefinitions(inFrameworks: item))
             }
         }
 
         return results.sorted(by: { $0.module < $1.module || $0.domain < $1.domain })
     }
 
-    private func findErrorCodes(inFrameworks path: URL) throws -> [ErrorCodes] {
+    private func findErrorDefinitions(inFrameworks path: URL) throws -> [ErrorDefinition] {
         var headers = path.appendingPathComponent("Headers")
         guard fileManager.fileExists(atPath: headers.path) else { return [] }
 
         var apinotes: [String: String?] = [:]
-        var results: [ErrorCodes] = []
+        var results: [ErrorDefinition] = []
         headers = headers
             .deletingLastPathComponent()
             .appendingPathComponent((try? fileManager.destinationOfSymbolicLink(atPath: headers.path)) ?? "Headers")
@@ -92,14 +93,14 @@ struct Main: AsyncParsableCommand {
 
         let items = try fileManager.contentsOfDirectory(at: headers, includingPropertiesForKeys: [])
         for item in items where item.lastPathComponent.hasSuffix(".h") {
-            results.append(contentsOf: try findErrorCodes(inFile: item, at: moduleName, apinotes: &apinotes))
+            results.append(contentsOf: try findErrorDefinitions(inFile: item, at: moduleName, apinotes: &apinotes))
         }
         return results
     }
 
-    private func findErrorCodes(inFile path: URL,
-                                at moduleName: String,
-                                apinotes cache: inout [String: String?]) throws -> [ErrorCodes] {
+    private func findErrorDefinitions(inFile path: URL,
+                                      at moduleName: String,
+                                      apinotes cache: inout [String: String?]) throws -> [ErrorDefinition] {
         lazy var apinotes: String? = {
             if cache.keys.contains(moduleName) {
                 return cache[moduleName] ?? nil
@@ -118,7 +119,7 @@ struct Main: AsyncParsableCommand {
         }
         let matches = enumRegex.matches(in: contents, range: contents.nsRange)
 
-        var results: [ErrorCodes] = []
+        var results: [ErrorDefinition] = []
         for match in matches {
             let domain = contents.substring(match.range(withName: "domain"))
             let codes = contents.substring(match.range(withName: "codes"))
@@ -126,17 +127,17 @@ struct Main: AsyncParsableCommand {
                 // sample code
                 continue
             }
-            var errorCodes = ErrorCodes.from(module: moduleName, rawDomain: domain, rawCodes: codes)
-            if !findSwiftNames(for: &errorCodes.codes, with: apinotes) {
-                inferSwiftNames(for: &errorCodes.codes)
+            var def = ErrorDefinition.from(module: moduleName, rawDomain: domain, rawCodes: codes)
+            if !findSwiftNames(for: &def.codes, with: apinotes) {
+                inferSwiftNames(for: &def.codes)
             }
-            results.append(errorCodes)
+            results.append(def)
         }
         return results
     }
 }
 
-private func findSwiftNames(for codes: inout [ErrorCodes.Code], with apinotes: String?) -> Bool {
+private func findSwiftNames(for codes: inout [ErrorDefinition.Code], with apinotes: String?) -> Bool {
     guard let apinotes else { return false }
 
     var mutableCodes = codes
@@ -150,7 +151,7 @@ private func findSwiftNames(for codes: inout [ErrorCodes.Code], with apinotes: S
     return true
 }
 
-private func inferSwiftNames(for codes: inout [ErrorCodes.Code]) {
+private func inferSwiftNames(for codes: inout [ErrorDefinition.Code]) {
     var offset = 0
     let names = codes.map { $0.name.camelcaseToSnakecase().components(separatedBy: "_") }
     while true {

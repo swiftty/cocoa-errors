@@ -1,6 +1,6 @@
 import Foundation
 
-struct ErrorCodes: Encodable, Hashable {
+struct ErrorDefinition: Encodable, Hashable {
     struct Code: Encodable, Hashable {
         var name: String
         var value: Value
@@ -35,7 +35,7 @@ struct ErrorCodes: Encodable, Hashable {
     }
 }
 
-extension ErrorCodes {
+extension ErrorDefinition {
     static func from(module: String, rawDomain: String, rawCodes: String) -> Self {
         let domain = rawDomain.components(separatedBy: ",").first ?? rawDomain
         let formatted = formatCodes(rawCodes[...])
@@ -51,7 +51,7 @@ extension ErrorCodes {
 
 private let codeRegex = try! NSRegularExpression(pattern: "(?<name>[a-zA-Z]+)([^=]*=\\s*(?<value>[0-9a-zA-Z-\"']+))?,?")
 
-extension ErrorCodes.Code {
+extension ErrorDefinition.Code {
     static func from(rawCode: String, previous: [Self]) -> Self? {
         guard let match = codeRegex.firstMatch(in: rawCode, range: rawCode.nsRange) else {
             fatalError("regex failure: \(rawCode)")
