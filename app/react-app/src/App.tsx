@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import Errors from './errors.json';
 import './App.css';
+import { MantineProvider, Text, TextInput } from '@mantine/core';
+import { useDebouncedValue, useInputState } from '@mantine/hooks';
+import Table from './components/Table';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MantineProvider theme={{ colorScheme: 'dark' }} withNormalizeCSS withGlobalStyles>
+      <Content />
+    </MantineProvider>
+  )
+}
+
+function Content() {
+  const errors = Errors.errors as any;
+
+  return (
+    <main>
+      <h1 className='title'>Cocoa Errors</h1>
+      <Table data={errors}></Table>
+    </main>
   );
 }
 
