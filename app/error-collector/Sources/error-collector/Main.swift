@@ -51,18 +51,11 @@ struct Main: AsyncParsableCommand {
     }
 
     func run() async throws {
-        var results: Set<ErrorCodes> = []
-
-        for frameworks in platforms {
-            let dirs = try fileManager.contentsOfDirectory(at: frameworks, includingPropertiesForKeys: [])
-            for item in dirs {
-                results.formUnion(try findErrorCodes(inFrameworks: item))
-            }
-        }
+        let results = try collectErrorCodes()
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, isPrettyPrint ? .prettyPrinted : []]
-        let data = try encoder.encode(results.sorted(by: { $0.module < $1.module || $0.domain < $1.domain }))
+        let data = try encoder.encode(results)
         let json = String(data: data, encoding: .utf8) ?? ""
 
         if let outputPath {
@@ -72,28 +65,53 @@ struct Main: AsyncParsableCommand {
         }
     }
 
+    private func collectErrorCodes() throws -> [ErrorCodes] {
+        var results: Set<ErrorCodes> = []
+
+        for frameworks in platforms {
+            let dirs = try fileManager.contentsOfDirectory(at: frameworks, includingPropertiesForKeys: [])
+            for item in dirs {
+                results.formUnion(try findErrorCodes(inFrameworks: item))
+            }
+        }
+
+        return results.sorted(by: { $0.module < $1.module || $0.domain < $1.domain })
+    }
+
     private func findErrorCodes(inFrameworks path: URL) throws -> [ErrorCodes] {
         var headers = path.appendingPathComponent("Headers")
         guard fileManager.fileExists(atPath: headers.path) else { return [] }
 
+        var apinotes: [String: String?] = [:]
         var results: [ErrorCodes] = []
         headers = headers
             .deletingLastPathComponent()
             .appendingPathComponent((try? fileManager.destinationOfSymbolicLink(atPath: headers.path)) ?? "Headers")
 
         let moduleName = path.deletingPathExtension().lastPathComponent
+
         let items = try fileManager.contentsOfDirectory(at: headers, includingPropertiesForKeys: [])
         for item in items where item.lastPathComponent.hasSuffix(".h") {
-            results.append(contentsOf: try findErrorCodes(inFile: item, at: moduleName))
+            results.append(contentsOf: try findErrorCodes(inFile: item, at: moduleName, apinotes: &apinotes))
         }
         return results
     }
 
-    private func findErrorCodes(inFile path: URL, at moduleName: String) throws -> [ErrorCodes] {
+    private func findErrorCodes(inFile path: URL,
+                                at moduleName: String,
+                                apinotes cache: inout [String: String?]) throws -> [ErrorCodes] {
+        lazy var apinotes: String? = {
+            if cache.keys.contains(moduleName) {
+                return cache[moduleName] ?? nil
+            }
+            let notes = try? String.open(at: path.deletingLastPathComponent().appendingPathComponent("\(moduleName).apinotes"))
+            cache[moduleName] = notes
+            return notes
+        }()
+
         let contents: String
         do {
-            let data = try Data(contentsOf: path)
-            contents = String(data: data, encoding: .utf8) ?? ""
+            contents = try .open(at: path)
         } catch {
             print("error at", path.lastPathComponent, error)
             return []
@@ -108,8 +126,56 @@ struct Main: AsyncParsableCommand {
                 // sample code
                 continue
             }
-            results.append(.from(module: moduleName, rawDomain: domain, rawCodes: codes))
+            var errorCodes = ErrorCodes.from(module: moduleName, rawDomain: domain, rawCodes: codes)
+            if !findSwiftNames(for: &errorCodes.codes, with: apinotes) {
+                inferSwiftNames(for: &errorCodes.codes)
+            }
+            results.append(errorCodes)
         }
         return results
+    }
+}
+
+private func findSwiftNames(for codes: inout [ErrorCodes.Code], with apinotes: String?) -> Bool {
+    guard let apinotes else { return false }
+
+    var mutableCodes = codes
+    for (i, code) in mutableCodes.enumerated() {
+        let regex = try! NSRegularExpression(pattern: "- Name: \(code.name)\n\\s+SwiftName:\\s(?<swiftName>[a-zA-Z]+)")
+        guard let match = regex.firstMatch(in: apinotes, range: apinotes.nsRange) else { return false }
+        mutableCodes[i].swiftName = apinotes.substring(match.range(withName: "swiftName"))
+    }
+
+    codes = mutableCodes
+    return true
+}
+
+private func inferSwiftNames(for codes: inout [ErrorCodes.Code]) {
+    var offset = 0
+    let names = codes.map { $0.name.camelcaseToSnakecase().components(separatedBy: "_") }
+    while true {
+        var buf: String?
+
+        func check() -> Bool {
+            for name in names {
+                guard name.indices.contains(offset) else { return false }
+                if buf == nil {
+                    buf = name[offset]
+                } else if buf != name[offset] {
+                    return false
+                }
+            }
+            offset += 1
+            return true
+        }
+
+        if !check() {
+            break
+        }
+    }
+
+    for (i, name) in names.enumerated() {
+        let prefix = name.prefix(offset).joined().count
+        codes[i].swiftName = String(codes[i].name.dropFirst(prefix)).lowerCamelcase()
     }
 }

@@ -6,6 +6,7 @@ struct ErrorCodes: Encodable, Hashable {
         var value: Value
         var unspecified: Bool?
         var sameAs: String?
+        var swiftName: String?
 
         enum Value: Encodable, Hashable {
             case int(Int)
