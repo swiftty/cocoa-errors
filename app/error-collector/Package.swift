@@ -7,7 +7,7 @@ let package = Package(
     name: "error-collector",
     platforms: [.macOS(.v12)],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0")
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.1.4")
     ],
     targets: [
         .executableTarget(
