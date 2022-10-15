@@ -1,4 +1,5 @@
-import { createStyles, Group, Anchor } from '@mantine/core';
+import { createStyles, Group, Anchor, ActionIcon, Space } from '@mantine/core';
+import { IconBrandTwitter } from '@tabler/icons';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 
 const useStyles = createStyles((theme) => ({
@@ -34,6 +35,10 @@ export function Footer({ links }: FooterSimpleProps) {
     <footer>
       <div className={classes.footer}>
         <Group position='right'>
+          <ActionIcon size="lg" component='a' href='https://twitter.com/_swiftty' target='_blank'>
+            <IconBrandTwitter size={18} stroke={1.5} />
+          </ActionIcon>
+          <Space w='xl'></Space>
           <ThemeToggle></ThemeToggle>
         </Group>
       </div>
