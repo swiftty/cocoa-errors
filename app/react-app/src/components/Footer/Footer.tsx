@@ -1,4 +1,5 @@
-import { createStyles, Container, Group, Anchor } from '@mantine/core';
+import { createStyles, Group, Anchor } from '@mantine/core';
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -6,24 +7,8 @@ const useStyles = createStyles((theme) => ({
     borderTop: `1px solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
     }`,
-  },
 
-  inner: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
-
-    [theme.fn.smallerThan('xs')]: {
-      flexDirection: 'column',
-    },
-  },
-
-  links: {
-    [theme.fn.smallerThan('xs')]: {
-      marginTop: theme.spacing.md,
-    },
+    padding: theme.spacing.xs
   },
 }));
 
@@ -46,10 +31,12 @@ export function Footer({ links }: FooterSimpleProps) {
   ));
 
   return (
-    <div className={classes.footer}>
-      <Container className={classes.inner}>
-        <Group className={classes.links}>{items}</Group>
-      </Container>
-    </div>
+    <footer>
+      <div className={classes.footer}>
+        <Group position='right'>
+          <ThemeToggle></ThemeToggle>
+        </Group>
+      </div>
+    </footer>
   );
 }

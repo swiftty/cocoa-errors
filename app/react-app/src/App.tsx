@@ -1,9 +1,8 @@
 import React from 'react';
 import ga4 from 'react-ga4';
 import Errors from './errors.json';
-import './App.css';
-import { MantineProvider, Text, TextInput, createStyles } from '@mantine/core';
-import { useDebouncedValue, useInputState } from '@mantine/hooks';
+import { MantineProvider, Text, TextInput, createStyles, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+import { useDebouncedValue, useInputState, useLocalStorage } from '@mantine/hooks';
 import Table from './components/Table/Table';
 import { Footer } from './components/Footer/Footer';
 
@@ -16,10 +15,20 @@ if (isProduction) {
 }
 
 function App() {
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: 'mantine-color-scheme',
+    defaultValue: 'dark',
+    getInitialValueInEffect: true,
+  });
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
   return (
-    <MantineProvider theme={{ colorScheme: 'dark' }} withNormalizeCSS withGlobalStyles>
-      <Body />
-    </MantineProvider>
+    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+      <MantineProvider theme={{ colorScheme: colorScheme }} withNormalizeCSS withGlobalStyles>
+        <Body />
+      </MantineProvider>
+    </ColorSchemeProvider>
   )
 }
 
@@ -34,6 +43,10 @@ const useStyles = createStyles((theme, params, getRef) => ({
   header: {
     marginLeft: theme.spacing.xl,
     marginRight: theme.spacing.xl,
+  },
+
+  headertitle: {
+    fontFamily: '"Nixie One", cursive',
   },
 
   main: {
@@ -56,7 +69,7 @@ function Body() {
   return (
     <div className={classes.container}>
       <header className={classes.header}>
-        <h1 className='title'>Cocoa Errors</h1>
+        <h1 className={classes.headertitle}>Cocoa Errors</h1>
       </header>
       <main className={classes.main}>
         <TextInput
@@ -65,9 +78,7 @@ function Body() {
         />
         <Table data={errors} filterText={value}></Table>
       </main>
-      <footer>
-        <Footer></Footer>
-      </footer>
+      <Footer></Footer>
     </div>
   );
 }
