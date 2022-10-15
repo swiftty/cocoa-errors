@@ -145,6 +145,13 @@ struct Main: AsyncParsableCommand {
             var def = ErrorDefinition.from(module: moduleName, rawDomain: domain, rawCodes: codes)
             if !findSwiftNames(for: &def.codes, with: apinotes) {
                 inferSwiftNames(for: &def.codes)
+                // `NSCocoaErrorDomain` almost has suffix `Error`, but swift representation has no `Error`.
+                // so, remove it manually.
+                if def.domain == "NSCocoaErrorDomain" {
+                    for (i, code) in def.codes.enumerated() where code.name.hasSuffix("Error") {
+                        def.codes[i].swiftName = code.swiftName.map { String($0.dropLast(5)) }
+                    }
+                }
             }
             results.append(def)
         }
