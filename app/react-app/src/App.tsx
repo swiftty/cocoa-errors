@@ -5,6 +5,7 @@ import { MantineProvider, Text, TextInput, createStyles, ColorSchemeProvider, Co
 import { useDebouncedValue, useInputState, useLocalStorage } from '@mantine/hooks';
 import Table from './components/Table/Table';
 import { Footer } from './components/Footer/Footer';
+import { Header } from './components/Header/Header';
 
 const isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
@@ -40,15 +41,6 @@ const useStyles = createStyles((theme, params, getRef) => ({
     minHeight: '100vh',
   },
 
-  header: {
-    marginLeft: theme.spacing.xl,
-    marginRight: theme.spacing.xl,
-  },
-
-  headertitle: {
-    fontFamily: '"Nixie One", cursive',
-  },
-
   main: {
     marginLeft: theme.spacing.xl,
     marginRight: theme.spacing.xl,
@@ -68,9 +60,7 @@ function Body() {
 
   return (
     <div className={classes.container}>
-      <header className={classes.header}>
-        <h1 className={classes.headertitle}>Cocoa Errors</h1>
-      </header>
+      <Header></Header>
       <main className={classes.main}>
         <TextInput
           className={classes.textInput} placeholder="type domain..."
