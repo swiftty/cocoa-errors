@@ -80,7 +80,8 @@ struct Main: AsyncParsableCommand {
                     if let old = results[def.domain] {
                         if old.codes != def.codes {
                             print("in domain: \(def.domain), \(old.codes.map(\.name)) not equals \(def.codes.map(\.name))\n")
-                        } else if old.codes.count < def.codes.count {
+                        }
+                        if old.codes.count < def.codes.count {
                             // override by a greater number of codes definitions
                             results[def.domain] = def
                         }
