@@ -7,4 +7,6 @@ services:
     command: sh -c "cd react-app && npm run start"
     ports:
       - "3000:3000"
+    environment:
+      - NODE_OPTIONS=--max_old_space_size=512
     stdin_open: true
