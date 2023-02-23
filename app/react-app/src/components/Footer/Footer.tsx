@@ -1,5 +1,5 @@
 import { createStyles, Group, Anchor, ActionIcon, Space } from '@mantine/core';
-import { IconBrandTwitter } from '@tabler/icons';
+import { IconBrandTwitter } from '@tabler/icons-react';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 
 const useStyles = createStyles((theme) => ({
