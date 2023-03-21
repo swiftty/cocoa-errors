@@ -19,7 +19,7 @@ export default createStyles((theme, params, getRef) => ({
     },
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[1],
     borderRadius: theme.radius.xs,
-    padding: theme.spacing.xs / 2,
+    padding: theme.spacing.xs,
   },
   code: {
     fontSize: theme.fontSizes.md,
