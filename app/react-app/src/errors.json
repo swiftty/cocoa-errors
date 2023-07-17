@@ -502,6 +502,16 @@
           "name" : "AVErrorAirPlayReceiverTemporarilyUnavailable",
           "swiftName" : "airPlayReceiverTemporarilyUnavailable",
           "value" : -11882
+        },
+        {
+          "name" : "AVErrorEncodeFailed",
+          "swiftName" : "encodeFailed",
+          "value" : -11883
+        },
+        {
+          "name" : "AVErrorSandboxExtensionDenied",
+          "swiftName" : "sandboxExtensionDenied",
+          "value" : -11884
         }
       ],
       "domain" : "AVFoundationErrorDomain",
@@ -1078,6 +1088,11 @@
           "name" : "CLLocationPushServiceErrorMissingEntitlement",
           "swiftName" : "missingEntitlement",
           "value" : 3
+        },
+        {
+          "name" : "CLLocationPushServiceErrorUnsupportedPlatform",
+          "swiftName" : "unsupportedPlatform",
+          "value" : 4
         }
       ],
       "domain" : "CLLocationPushServiceErrorDomain",
@@ -3326,7 +3341,7 @@
     }
   ],
   "version" : {
-    "build" : "14B47b",
-    "xcode" : "14.1"
+    "build" : "14E300c",
+    "xcode" : "14.3.1"
   }
 }
