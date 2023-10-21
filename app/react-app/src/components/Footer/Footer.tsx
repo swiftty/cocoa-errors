@@ -1,24 +1,13 @@
-import { createStyles, Group, Anchor, ActionIcon, Space } from '@mantine/core';
-import { IconBrandTwitter } from '@tabler/icons-react';
+import { Group, Anchor, ActionIcon, Space } from '@mantine/core';
+import { IconBrandX } from '@tabler/icons-react';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
-
-const useStyles = createStyles((theme) => ({
-  footer: {
-    marginTop: 120,
-    borderTop: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
-
-    padding: theme.spacing.xs
-  },
-}));
+import classes from './Footer.module.css';
 
 interface FooterSimpleProps {
   links?: { link: string; label: string }[];
 }
 
 export function Footer({ links }: FooterSimpleProps) {
-  const { classes } = useStyles();
   const items = links?.map((link) => (
     <Anchor<'a'>
       color="dimmed"
@@ -34,11 +23,10 @@ export function Footer({ links }: FooterSimpleProps) {
   return (
     <footer>
       <div className={classes.footer}>
-        <Group position='right'>
+        <Group gap="xl" justify="flex-end" wrap="nowrap">
           <ActionIcon size="lg" component='a' href='https://twitter.com/_swiftty' target='_blank'>
-            <IconBrandTwitter size={18} stroke={1.5} />
+            <IconBrandX size={18} stroke={1.5} />
           </ActionIcon>
-          <Space w='xl'></Space>
           <ThemeToggle></ThemeToggle>
         </Group>
       </div>

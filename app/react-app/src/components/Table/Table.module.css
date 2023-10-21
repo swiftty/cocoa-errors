@@ -1,0 +1,33 @@
+.domain {
+  font-weight: 600;
+  font-size: var(--mantine-font-size-md);
+}
+
+.domainSub {
+  font-size: var(--mantine-font-size-xs);
+  margin-left: var(--mantine-spacing-xs);
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-2));
+}
+
+.pre {
+  &::before {
+    content: "`";
+  }
+  &::after {
+    content: "`";
+  }
+  background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
+  border-radius: var(--mantine-radius-xs);
+  padding: var(--mantine-spacing-xs);
+}
+
+.code {
+  font-size: var(--mantine-font-size-md);
+  text-align: right;
+}
+
+.codeSub {
+  font-size: var(--mantine-font-size-xs);
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-2));
+  text-align: right;
+}

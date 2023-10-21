@@ -1,0 +1,22 @@
+.header {
+    margin-left: var(--mantine-spacing-xl);
+    margin-right: var(--mantine-spacing-xl);
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.headertitle {
+    font-family: "Nixie One", cursive;
+}
+
+.versionContainer {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: var(--mantine-spacing-xs);
+}
+
+.version {
+    font-size: var(--mantine-font-size-xs);
+    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-2));
+}
