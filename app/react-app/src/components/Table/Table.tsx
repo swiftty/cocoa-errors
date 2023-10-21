@@ -1,7 +1,6 @@
 import React from 'react';
-import errors from '../../errors.json';
-import useStyles from './Table.styles';
 import { Table as SystemTable, Text, TextInput, ScrollArea } from '@mantine/core';
+import classes from './Table.module.css';
 
 type ErrorItem = {
   domain: string;
@@ -26,31 +25,31 @@ interface TableProps {
 }
 
 function Table({ data, filterText }: TableProps) {
-  const { classes, cx } = useStyles();
-
   const query = filterText.toLocaleLowerCase().trim();
-  const rows = query.length > 0 
+  const rows = query.length > 0
     ? (data
       .filter((item) => item.domain.toLowerCase().includes(query))
       .flatMap((item) => (
         [...item.codes.map((row) => (
-          <tr key={row.name}>
-            <td>
+          <SystemTable.Tr key={row.name}>
+            <SystemTable.Td>
               <div className={classes.domain}>{item.domain}</div>
               <div className={classes.domainSub}>in {item.module}.framework</div>
-            </td>
-            <td><pre><span className={classes.pre}>{row.name}</span></pre></td>
-            <td>
+            </SystemTable.Td>
+            <SystemTable.Td>
+              <pre><span className={classes.pre}>{row.name}</span></pre>
+            </SystemTable.Td>
+            <SystemTable.Td>
               <div className={classes.code}>{row.value}</div>
               {row?.unspecified && <div className={classes.codeSub}>{'※ default value'}</div>}
               {row?.sameAs && <div className={classes.codeSub}>same as `{row.sameAs}`</div>}
-            </td>
-            <td>
+            </SystemTable.Td>
+            <SystemTable.Td>
               {row.swiftName && <pre><span className={classes.pre}>{row.swiftName}</span></pre>}
-            </td>
-          </tr>
+            </SystemTable.Td>
+          </SystemTable.Tr>
         ))]
-    ))) 
+    )))
     : [];
 
   return (
@@ -58,27 +57,26 @@ function Table({ data, filterText }: TableProps) {
       <SystemTable
          horizontalSpacing={'md'}
          verticalSpacing={'xs'}
+         miw={700}
       >
-        <thead>
-          <tr>
-            <th>domain</th>
-            <th>
-              name
-            </th>
-            <th>code</th>
-            <th>swift maybe?</th>
-          </tr>
-        </thead>
-        <tbody>
+        <SystemTable.Thead>
+          <SystemTable.Tr>
+            <SystemTable.Th>domain</SystemTable.Th>
+            <SystemTable.Th>name</SystemTable.Th>
+            <SystemTable.Th>code</SystemTable.Th>
+            <SystemTable.Th>swift maybe?</SystemTable.Th>
+          </SystemTable.Tr>
+        </SystemTable.Thead>
+
+        <SystemTable.Tbody>
           {rows.length > 0 ? (
             rows
           ) : (
-            <tr>
-              <td colSpan={4}>
-              </td>
-            </tr>
+            <SystemTable.Tr>
+              <SystemTable.Td colSpan={4}></SystemTable.Td>
+            </SystemTable.Tr>
           )}
-        </tbody>
+        </SystemTable.Tbody>
       </SystemTable>
     </ScrollArea>
   )
