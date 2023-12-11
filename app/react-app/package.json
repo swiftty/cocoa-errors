@@ -6,7 +6,7 @@
     "@emotion/react": "11.11.1",
     "@mantine/core": "7.3.1",
     "@mantine/hooks": "7.3.1",
-    "@tabler/icons-react": "2.43.0",
+    "@tabler/icons-react": "2.44.0",
     "@testing-library/jest-dom": "6.1.5",
     "@testing-library/react": "14.1.2",
     "@testing-library/user-event": "14.5.1",
