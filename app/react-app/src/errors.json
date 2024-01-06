@@ -798,6 +798,11 @@
           "name" : "CXErrorCodeIncomingCallErrorFilteredByBlockList",
           "swiftName" : "filteredByBlockList",
           "value" : 4
+        },
+        {
+          "name" : "CXErrorCodeIncomingCallErrorFilteredDuringRestrictedSharingMode",
+          "swiftName" : "filteredDuringRestrictedSharingMode",
+          "value" : 5
         }
       ],
       "domain" : "CXErrorDomainIncomingCall",
@@ -869,6 +874,47 @@
       ],
       "domain" : "CXErrorDomainRequestTransaction",
       "module" : "CallKit"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "CNCinematicErrorCodeUnknown",
+          "swiftName" : "unknown",
+          "value" : 1
+        },
+        {
+          "name" : "CNCinematicErrorCodeUnreadable",
+          "swiftName" : "unreadable",
+          "value" : 2
+        },
+        {
+          "name" : "CNCinematicErrorCodeIncomplete",
+          "swiftName" : "incomplete",
+          "value" : 3
+        },
+        {
+          "name" : "CNCinematicErrorCodeMalformed",
+          "swiftName" : "malformed",
+          "value" : 4
+        },
+        {
+          "name" : "CNCinematicErrorCodeUnsupported",
+          "swiftName" : "unsupported",
+          "value" : 5
+        },
+        {
+          "name" : "CNCinematicErrorCodeIncompatible",
+          "swiftName" : "incompatible",
+          "value" : 6
+        },
+        {
+          "name" : "CNCinematicErrorCodeCancelled",
+          "swiftName" : "cancelled",
+          "value" : 7
+        }
+      ],
+      "domain" : "CNCinematicErrorDomain",
+      "module" : "Cinematic"
     },
     {
       "codes" : [
@@ -1230,6 +1276,75 @@
       ],
       "domain" : "NFCErrorDomain",
       "module" : "CoreNFC"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "TKErrorCodeNotImplemented",
+          "swiftName" : "codeNotImplemented",
+          "value" : -1
+        },
+        {
+          "name" : "TKErrorCodeCommunicationError",
+          "swiftName" : "codeCommunicationError",
+          "value" : -2
+        },
+        {
+          "name" : "TKErrorCodeCorruptedData",
+          "swiftName" : "codeCorruptedData",
+          "value" : -3
+        },
+        {
+          "name" : "TKErrorCodeCanceledByUser",
+          "swiftName" : "codeCanceledByUser",
+          "value" : -4
+        },
+        {
+          "name" : "TKErrorCodeAuthenticationFailed",
+          "swiftName" : "codeAuthenticationFailed",
+          "value" : -5
+        },
+        {
+          "name" : "TKErrorCodeObjectNotFound",
+          "swiftName" : "codeObjectNotFound",
+          "value" : -6
+        },
+        {
+          "name" : "TKErrorCodeTokenNotFound",
+          "swiftName" : "codeTokenNotFound",
+          "value" : -7
+        },
+        {
+          "name" : "TKErrorCodeBadParameter",
+          "swiftName" : "codeBadParameter",
+          "value" : -8
+        },
+        {
+          "name" : "TKErrorCodeAuthenticationNeeded",
+          "swiftName" : "codeAuthenticationNeeded",
+          "value" : -9
+        },
+        {
+          "name" : "TKErrorAuthenticationFailed",
+          "sameAs" : "TKErrorCodeAuthenticationFailed",
+          "swiftName" : "authenticationFailed",
+          "value" : -5
+        },
+        {
+          "name" : "TKErrorObjectNotFound",
+          "sameAs" : "TKErrorCodeObjectNotFound",
+          "swiftName" : "objectNotFound",
+          "value" : -6
+        },
+        {
+          "name" : "TKErrorTokenNotFound",
+          "sameAs" : "TKErrorCodeTokenNotFound",
+          "swiftName" : "tokenNotFound",
+          "value" : -7
+        }
+      ],
+      "domain" : "TKErrorDomain",
+      "module" : "CryptoTokenKit"
     },
     {
       "codes" : [
@@ -2177,6 +2292,12 @@
           "swiftName" : "metadataFetchTimedOut",
           "unspecified" : true,
           "value" : 4
+        },
+        {
+          "name" : "LPErrorMetadataFetchNotAllowed",
+          "swiftName" : "metadataFetchNotAllowed",
+          "unspecified" : true,
+          "value" : 5
         }
       ],
       "domain" : "LPErrorDomain",
@@ -2318,6 +2439,16 @@
           "name" : "NIErrorCodeAccessoryPeerDeviceUnavailable",
           "swiftName" : "accessoryPeerDeviceUnavailable",
           "value" : -5882
+        },
+        {
+          "name" : "NIErrorCodeIncompatiblePeerDevice",
+          "swiftName" : "incompatiblePeerDevice",
+          "value" : -5881
+        },
+        {
+          "name" : "NIErrorCodeActiveExtendedDistanceSessionsLimitExceeded",
+          "swiftName" : "activeExtendedDistanceSessionsLimitExceeded",
+          "value" : -5880
         }
       ],
       "domain" : "NIErrorDomain",
@@ -2483,6 +2614,28 @@
         }
       ],
       "domain" : "PKAddSecureElementPassErrorDomain",
+      "module" : "PassKit"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "PKDisbursementUnknownError",
+          "swiftName" : "unknownError",
+          "value" : -1
+        },
+        {
+          "name" : "PKDisbursementUnsupportedCardError",
+          "swiftName" : "unsupportedCardError",
+          "value" : 1
+        },
+        {
+          "name" : "PKDisbursementRecipientContactInvalidError",
+          "swiftName" : "recipientContactInvalidError",
+          "unspecified" : true,
+          "value" : 2
+        }
+      ],
+      "domain" : "PKDisbursementErrorDomain",
       "module" : "PassKit"
     },
     {
@@ -2979,6 +3132,11 @@
           "name" : "SHErrorCodeInternalError",
           "swiftName" : "internalError",
           "value" : 500
+        },
+        {
+          "name" : "SHErrorCodeMediaItemFetchFailed",
+          "swiftName" : "mediaItemFetchFailed",
+          "value" : 600
         }
       ],
       "domain" : "SHErrorDomain",
@@ -3301,6 +3459,16 @@
           "value" : 10
         },
         {
+          "name" : "VZErrorSave",
+          "swiftName" : "save",
+          "value" : 11
+        },
+        {
+          "name" : "VZErrorRestore",
+          "swiftName" : "restore",
+          "value" : 12
+        },
+        {
           "name" : "VZErrorRestoreImageCatalogLoadFailed",
           "swiftName" : "restoreImageCatalogLoadFailed",
           "value" : 10001
@@ -3334,6 +3502,16 @@
           "name" : "VZErrorInstallationFailed",
           "swiftName" : "installationFailed",
           "value" : 10007
+        },
+        {
+          "name" : "VZErrorNetworkBlockDeviceNegotiationFailed",
+          "swiftName" : "networkBlockDeviceNegotiationFailed",
+          "value" : 20001
+        },
+        {
+          "name" : "VZErrorNetworkBlockDeviceDisconnected",
+          "swiftName" : "networkBlockDeviceDisconnected",
+          "value" : 20002
         }
       ],
       "domain" : "VZErrorDomain",
@@ -3341,7 +3519,7 @@
     }
   ],
   "version" : {
-    "build" : "14E300c",
-    "xcode" : "14.3.1"
+    "build" : "15C65",
+    "xcode" : "15.1"
   }
 }
