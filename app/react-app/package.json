@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "11.13.3",
+    "@emotion/react": "11.13.5",
     "@mantine/core": "7.14.1",
     "@mantine/hooks": "7.14.1",
     "@tabler/icons-react": "3.22.0",
