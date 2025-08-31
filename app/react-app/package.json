@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@emotion/react": "11.14.0",
-    "@mantine/core": "8.2.7",
-    "@mantine/hooks": "8.2.7",
+    "@mantine/core": "8.2.8",
+    "@mantine/hooks": "8.2.8",
     "@tabler/icons-react": "3.34.1",
     "@testing-library/jest-dom": "6.8.0",
     "@testing-library/react": "16.3.0",
