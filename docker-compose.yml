@@ -4,7 +4,7 @@ services:
     build: ./
     volumes:
       - ./app:/app
-    command: sh -c "cd react-app && npm install && npm run start"
+    command: sh -c "cd react-app && npm install && npm run start:vite"
     ports:
       - "3000:3000"
     environment:
