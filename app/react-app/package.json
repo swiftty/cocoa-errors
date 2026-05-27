@@ -6,29 +6,14 @@
     "@emotion/react": "11.14.0",
     "@mantine/core": "9.2.1",
     "@mantine/hooks": "9.2.1",
-    "@tabler/icons-react": "3.44.0",
-    "@testing-library/jest-dom": "6.9.1",
-    "@testing-library/react": "16.3.2",
-    "@testing-library/user-event": "14.6.1",
-    "@types/jest": "30.0.0",
-    "@types/node": "24.12.4",
-    "@types/react": "19.2.15",
-    "@types/react-dom": "19.2.3",
-    "prettier": "3.8.3",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-ga4": "3.0.1",
-    "react-scripts": "5.0.1",
-    "typescript": "4.9.5",
     "web-vitals": "5.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start:vite": "vite",
-    "build:vite": "vite build"
+    "start": "vite",
+    "build": "vite build"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +34,16 @@
     ]
   },
   "devDependencies": {
+    "typescript": "4.9.5",
+    "@tabler/icons-react": "3.44.0",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
+    "@types/jest": "30.0.0",
+    "@types/node": "24.12.4",
+    "@types/react": "19.2.15",
+    "@types/react-dom": "19.2.3",
+    "prettier": "3.8.3",
     "@vitejs/plugin-react": "^6.0.2",
     "vite": "^8.0.14"
   }
