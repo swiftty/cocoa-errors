@@ -3,112 +3,6 @@
     {
       "codes" : [
         {
-          "name" : "ARErrorCodeUnsupportedConfiguration",
-          "swiftName" : "unsupportedConfiguration",
-          "value" : 100
-        },
-        {
-          "name" : "ARErrorCodeSensorUnavailable",
-          "swiftName" : "sensorUnavailable",
-          "value" : 101
-        },
-        {
-          "name" : "ARErrorCodeSensorFailed",
-          "swiftName" : "sensorFailed",
-          "value" : 102
-        },
-        {
-          "name" : "ARErrorCodeCameraUnauthorized",
-          "swiftName" : "cameraUnauthorized",
-          "value" : 103
-        },
-        {
-          "name" : "ARErrorCodeMicrophoneUnauthorized",
-          "swiftName" : "microphoneUnauthorized",
-          "value" : 104
-        },
-        {
-          "name" : "ARErrorCodeLocationUnauthorized",
-          "swiftName" : "locationUnauthorized",
-          "value" : 105
-        },
-        {
-          "name" : "ARErrorCodeHighResolutionFrameCaptureInProgress",
-          "swiftName" : "highResolutionFrameCaptureInProgress",
-          "value" : 106
-        },
-        {
-          "name" : "ARErrorCodeHighResolutionFrameCaptureFailed",
-          "swiftName" : "highResolutionFrameCaptureFailed",
-          "value" : 107
-        },
-        {
-          "name" : "ARErrorCodeWorldTrackingFailed",
-          "swiftName" : "worldTrackingFailed",
-          "value" : 200
-        },
-        {
-          "name" : "ARErrorCodeGeoTrackingNotAvailableAtLocation",
-          "swiftName" : "geoTrackingNotAvailableAtLocation",
-          "value" : 201
-        },
-        {
-          "name" : "ARErrorCodeGeoTrackingFailed",
-          "swiftName" : "geoTrackingFailed",
-          "value" : 202
-        },
-        {
-          "name" : "ARErrorCodeInvalidReferenceImage",
-          "swiftName" : "invalidReferenceImage",
-          "value" : 300
-        },
-        {
-          "name" : "ARErrorCodeInvalidReferenceObject",
-          "swiftName" : "invalidReferenceObject",
-          "value" : 301
-        },
-        {
-          "name" : "ARErrorCodeInvalidWorldMap",
-          "swiftName" : "invalidWorldMap",
-          "value" : 302
-        },
-        {
-          "name" : "ARErrorCodeInvalidConfiguration",
-          "swiftName" : "invalidConfiguration",
-          "value" : 303
-        },
-        {
-          "name" : "ARErrorCodeInvalidCollaborationData",
-          "swiftName" : "invalidCollaborationData",
-          "value" : 304
-        },
-        {
-          "name" : "ARErrorCodeInsufficientFeatures",
-          "swiftName" : "insufficientFeatures",
-          "value" : 400
-        },
-        {
-          "name" : "ARErrorCodeObjectMergeFailed",
-          "swiftName" : "objectMergeFailed",
-          "value" : 401
-        },
-        {
-          "name" : "ARErrorCodeFileIOFailed",
-          "swiftName" : "fileIOFailed",
-          "value" : 500
-        },
-        {
-          "name" : "ARErrorCodeRequestFailed",
-          "swiftName" : "requestFailed",
-          "value" : 501
-        }
-      ],
-      "domain" : "ARErrorDomain",
-      "module" : "ARKit"
-    },
-    {
-      "codes" : [
-        {
           "name" : "AVErrorUnknown",
           "swiftName" : "unknown",
           "value" : -11800
@@ -512,10 +406,145 @@
           "name" : "AVErrorSandboxExtensionDenied",
           "swiftName" : "sandboxExtensionDenied",
           "value" : -11884
+        },
+        {
+          "name" : "AVErrorToneMappingFailed",
+          "swiftName" : "toneMappingFailed",
+          "value" : -11885
+        },
+        {
+          "name" : "AVErrorMediaExtensionDisabled",
+          "swiftName" : "mediaExtensionDisabled",
+          "value" : -11886
+        },
+        {
+          "name" : "AVErrorMediaExtensionConflict",
+          "swiftName" : "mediaExtensionConflict",
+          "value" : -11887
+        },
+        {
+          "name" : "AVErrorContentKeyRequestPlaybackDestinationDoesNotSupportDeviceIdentifierRandomization",
+          "swiftName" : "contentKeyRequestPlaybackDestinationDoesNotSupportDeviceIdentifierRandomization",
+          "value" : -11888
+        },
+        {
+          "name" : "AVErrorContentKeyInvalid",
+          "swiftName" : "contentKeyInvalid",
+          "value" : -11889
+        },
+        {
+          "name" : "AVErrorNoSmartFramingsEnabled",
+          "swiftName" : "noSmartFramingsEnabled",
+          "value" : -11890
+        },
+        {
+          "name" : "AVErrorAutoWhiteBalanceNotLocked",
+          "swiftName" : "autoWhiteBalanceNotLocked",
+          "value" : -11891
+        },
+        {
+          "name" : "AVErrorFollowExternalSyncDeviceTimedOut",
+          "swiftName" : "followExternalSyncDeviceTimedOut",
+          "value" : -11892
         }
       ],
       "domain" : "AVFoundationErrorDomain",
       "module" : "AVFoundation"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "AXFeatureOverrideSessionErrorUndefined",
+          "swiftName" : "undefined",
+          "value" : 0
+        },
+        {
+          "name" : "AXFeatureOverrideSessionErrorAppNotEntitled",
+          "swiftName" : "appNotEntitled",
+          "unspecified" : true,
+          "value" : 1
+        },
+        {
+          "name" : "AXFeatureOverrideSessionErrorOverrideIsAlreadyActive",
+          "swiftName" : "overrideIsAlreadyActive",
+          "unspecified" : true,
+          "value" : 2
+        },
+        {
+          "name" : "AXFeatureOverrideSessionErrorOverrideNotFoundForUUID",
+          "swiftName" : "overrideNotFoundForUUID",
+          "unspecified" : true,
+          "value" : 3
+        }
+      ],
+      "domain" : "AXFeatureOverrideSessionErrorDomain",
+      "module" : "Accessibility"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "ASErrorCodeSuccess",
+          "swiftName" : "success",
+          "value" : 0
+        },
+        {
+          "name" : "ASErrorCodeUnknown",
+          "swiftName" : "unknown",
+          "value" : 1
+        },
+        {
+          "name" : "ASErrorCodeActivationFailed",
+          "swiftName" : "activationFailed",
+          "value" : 100
+        },
+        {
+          "name" : "ASErrorCodeConnectionFailed",
+          "swiftName" : "connectionFailed",
+          "value" : 150
+        },
+        {
+          "name" : "ASErrorCodeDiscoveryTimeout",
+          "swiftName" : "discoveryTimeout",
+          "value" : 200
+        },
+        {
+          "name" : "ASErrorCodeExtensionNotFound",
+          "swiftName" : "extensionNotFound",
+          "value" : 300
+        },
+        {
+          "name" : "ASErrorCodeInvalidated",
+          "swiftName" : "invalidated",
+          "value" : 400
+        },
+        {
+          "name" : "ASErrorCodeInvalidRequest",
+          "swiftName" : "invalidRequest",
+          "value" : 450
+        },
+        {
+          "name" : "ASErrorCodePickerAlreadyActive",
+          "swiftName" : "pickerAlreadyActive",
+          "value" : 500
+        },
+        {
+          "name" : "ASErrorCodePickerRestricted",
+          "swiftName" : "pickerRestricted",
+          "value" : 550
+        },
+        {
+          "name" : "ASErrorCodeUserCancelled",
+          "swiftName" : "userCancelled",
+          "value" : 700
+        },
+        {
+          "name" : "ASErrorCodeUserRestricted",
+          "swiftName" : "userRestricted",
+          "value" : 750
+        }
+      ],
+      "domain" : "ASErrorDomain",
+      "module" : "AccessorySetupKit"
     },
     {
       "codes" : [
@@ -585,6 +614,31 @@
           "name" : "ASAuthorizationErrorNotInteractive",
           "swiftName" : "notInteractive",
           "value" : 1005
+        },
+        {
+          "name" : "ASAuthorizationErrorMatchedExcludedCredential",
+          "swiftName" : "matchedExcludedCredential",
+          "value" : 1006
+        },
+        {
+          "name" : "ASAuthorizationErrorCredentialImport",
+          "swiftName" : "credentialImport",
+          "value" : 1007
+        },
+        {
+          "name" : "ASAuthorizationErrorCredentialExport",
+          "swiftName" : "credentialExport",
+          "value" : 1008
+        },
+        {
+          "name" : "ASAuthorizationErrorPreferSignInWithApple",
+          "swiftName" : "preferSignInWithApple",
+          "value" : 1009
+        },
+        {
+          "name" : "ASAuthorizationErrorDeviceNotConfiguredForPasskeyCreation",
+          "swiftName" : "deviceNotConfiguredForPasskeyCreation",
+          "value" : 1010
         }
       ],
       "domain" : "ASAuthorizationErrorDomain",
@@ -632,6 +686,11 @@
           "name" : "ASExtensionErrorCodeCredentialIdentityNotFound",
           "swiftName" : "credentialIdentityNotFound",
           "value" : 101
+        },
+        {
+          "name" : "ASExtensionErrorCodeMatchedExcludedCredential",
+          "swiftName" : "matchedExcludedCredential",
+          "value" : 102
         }
       ],
       "domain" : "ASExtensionErrorDomain",
@@ -669,6 +728,21 @@
           "name" : "AEAssessmentErrorUnsupportedPlatform",
           "swiftName" : "unsupportedPlatform",
           "value" : 2
+        },
+        {
+          "name" : "AEAssessmentErrorMultipleParticipantsNotSupported",
+          "swiftName" : "multipleParticipantsNotSupported",
+          "value" : 3
+        },
+        {
+          "name" : "AEAssessmentErrorConfigurationUpdatesNotSupported",
+          "swiftName" : "configurationUpdatesNotSupported",
+          "value" : 4
+        },
+        {
+          "name" : "AEAssessmentErrorRequiredParticipantsNotAvailable",
+          "swiftName" : "requiredParticipantsNotAvailable",
+          "value" : 5
         }
       ],
       "domain" : "AEAssessmentErrorDomain",
@@ -690,10 +764,38 @@
           "name" : "BGTaskSchedulerErrorCodeNotPermitted",
           "swiftName" : "notPermitted",
           "value" : 3
+        },
+        {
+          "name" : "BGTaskSchedulerErrorCodeImmediateRunIneligible",
+          "swiftName" : "immediateRunIneligible",
+          "value" : 4
         }
       ],
       "domain" : "BGTaskSchedulerErrorDomain",
       "module" : "BackgroundTasks"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "BEBrowserDataDataExchangeErrorUnknown",
+          "swiftName" : "unknown",
+          "value" : 0
+        },
+        {
+          "name" : "BEBrowserDataDataExchangeErrorExport",
+          "swiftName" : "export",
+          "unspecified" : true,
+          "value" : 1
+        },
+        {
+          "name" : "BEBrowserDataDataExchangeErrorImport",
+          "swiftName" : "import",
+          "unspecified" : true,
+          "value" : 2
+        }
+      ],
+      "domain" : "BEBrowserDataExchangeErrorDomain",
+      "module" : "BrowserKit"
     },
     {
       "codes" : [
@@ -803,6 +905,16 @@
           "name" : "CXErrorCodeIncomingCallErrorFilteredDuringRestrictedSharingMode",
           "swiftName" : "filteredDuringRestrictedSharingMode",
           "value" : 5
+        },
+        {
+          "name" : "CXErrorCodeIncomingCallErrorCallIsProtected",
+          "swiftName" : "callIsProtected",
+          "value" : 6
+        },
+        {
+          "name" : "CXErrorCodeIncomingCallErrorFilteredBySensitiveParticipants",
+          "swiftName" : "filteredBySensitiveParticipants",
+          "value" : 7
         }
       ],
       "domain" : "CXErrorDomainIncomingCall",
@@ -870,6 +982,11 @@
           "name" : "CXErrorCodeRequestTransactionErrorMaximumCallGroupsReached",
           "swiftName" : "maximumCallGroupsReached",
           "value" : 7
+        },
+        {
+          "name" : "CXErrorCodeRequestTransactionErrorCallIsProtected",
+          "swiftName" : "callIsProtected",
+          "value" : 8
         }
       ],
       "domain" : "CXErrorDomainRequestTransaction",
@@ -1180,6 +1297,18 @@
           "swiftName" : "readerErrorRadioDisabled",
           "unspecified" : true,
           "value" : 6
+        },
+        {
+          "name" : "NFCReaderErrorIneligible",
+          "swiftName" : "readerErrorIneligible",
+          "unspecified" : true,
+          "value" : 7
+        },
+        {
+          "name" : "NFCReaderErrorAccessNotAccepted",
+          "swiftName" : "readerErrorAccessNotAccepted",
+          "unspecified" : true,
+          "value" : 8
         },
         {
           "name" : "NFCReaderTransceiveErrorTagConnectionLost",
@@ -1545,6 +1674,47 @@
     {
       "codes" : [
         {
+          "name" : "FSErrorModuleLoadFailed",
+          "swiftName" : "moduleLoadFailed",
+          "value" : 4500
+        },
+        {
+          "name" : "FSErrorResourceUnrecognized",
+          "swiftName" : "resourceUnrecognized",
+          "value" : 4501
+        },
+        {
+          "name" : "FSErrorResourceDamaged",
+          "swiftName" : "resourceDamaged",
+          "value" : 4502
+        },
+        {
+          "name" : "FSErrorResourceUnusable",
+          "swiftName" : "resourceUnusable",
+          "value" : 4503
+        },
+        {
+          "name" : "FSErrorStatusOperationInProgress",
+          "swiftName" : "statusOperationInProgress",
+          "value" : 4504
+        },
+        {
+          "name" : "FSErrorStatusOperationPaused",
+          "swiftName" : "statusOperationPaused",
+          "value" : 4505
+        },
+        {
+          "name" : "FSErrorInvalidDirectoryCookie",
+          "swiftName" : "invalidDirectoryCookie",
+          "value" : 4506
+        }
+      ],
+      "domain" : "FSKitErrorDomain",
+      "module" : "FSKit"
+    },
+    {
+      "codes" : [
+        {
           "name" : "NSFileProviderErrorNotAuthenticated",
           "swiftName" : "notAuthenticated",
           "value" : -1000
@@ -1644,6 +1814,26 @@
           "name" : "NSFileProviderErrorDomainDisabled",
           "swiftName" : "domainDisabled",
           "value" : -2011
+        },
+        {
+          "name" : "NSFileProviderErrorProviderDomainTemporarilyUnavailable",
+          "swiftName" : "providerDomainTemporarilyUnavailable",
+          "value" : -2012
+        },
+        {
+          "name" : "NSFileProviderErrorProviderDomainNotFound",
+          "swiftName" : "providerDomainNotFound",
+          "value" : -2013
+        },
+        {
+          "name" : "NSFileProviderErrorApplicationExtensionNotFound",
+          "swiftName" : "applicationExtensionNotFound",
+          "value" : -2014
+        },
+        {
+          "name" : "NSFileProviderErrorLocalVersionConflictingWithServer",
+          "swiftName" : "localVersionConflictingWithServer",
+          "value" : -2015
         }
       ],
       "domain" : "NSFileProviderErrorDomain",
@@ -2343,6 +2533,72 @@
     {
       "codes" : [
         {
+          "name" : "MEErrorUnsupportedFeature",
+          "swiftName" : "unsupportedFeature",
+          "value" : -19320
+        },
+        {
+          "name" : "MEErrorAllocationFailure",
+          "swiftName" : "allocationFailure",
+          "value" : -19321
+        },
+        {
+          "name" : "MEErrorInvalidParameter",
+          "swiftName" : "invalidParameter",
+          "value" : -19322
+        },
+        {
+          "name" : "MEErrorParsingFailure",
+          "swiftName" : "parsingFailure",
+          "value" : -19323
+        },
+        {
+          "name" : "MEErrorInternalFailure",
+          "swiftName" : "internalFailure",
+          "value" : -19324
+        },
+        {
+          "name" : "MEErrorPropertyNotSupported",
+          "swiftName" : "propertyNotSupported",
+          "value" : -19325
+        },
+        {
+          "name" : "MEErrorNoSuchEdit",
+          "swiftName" : "noSuchEdit",
+          "value" : -19326
+        },
+        {
+          "name" : "MEErrorNoSamples",
+          "swiftName" : "noSamples",
+          "value" : -19327
+        },
+        {
+          "name" : "MEErrorLocationNotAvailable",
+          "swiftName" : "locationNotAvailable",
+          "value" : -19328
+        },
+        {
+          "name" : "MEErrorEndOfStream",
+          "swiftName" : "endOfStream",
+          "value" : -19329
+        },
+        {
+          "name" : "MEErrorPermissionDenied",
+          "swiftName" : "permissionDenied",
+          "value" : -19330
+        },
+        {
+          "name" : "MEErrorReferenceMissing",
+          "swiftName" : "referenceMissing",
+          "value" : -19331
+        }
+      ],
+      "domain" : "MediaExtensionErrorDomain",
+      "module" : "MediaExtension"
+    },
+    {
+      "codes" : [
+        {
           "name" : "MTLIOErrorURLInvalid",
           "swiftName" : "urlInvalid",
           "value" : 1
@@ -2571,9 +2827,14 @@
     {
       "codes" : [
         {
+          "name" : "PKAddSecureElementPassGenericError",
+          "swiftName" : "genericError",
+          "value" : 0
+        },
+        {
           "name" : "PKAddSecureElementPassUnknownError",
+          "sameAs" : "PKAddSecureElementPassGenericError",
           "swiftName" : "unknownError",
-          "unspecified" : true,
           "value" : 0
         },
         {
@@ -2679,6 +2940,11 @@
           "name" : "PKIdentityErrorInvalidElement",
           "swiftName" : "invalidElement",
           "value" : 7
+        },
+        {
+          "name" : "PKIdentityErrorRegionNotSupported",
+          "swiftName" : "regionNotSupported",
+          "value" : 8
         }
       ],
       "domain" : "PKIdentityErrorDomain",
@@ -2852,6 +3118,11 @@
           "name" : "PHPhotosErrorRequestNotSupportedForAsset",
           "swiftName" : "requestNotSupportedForAsset",
           "value" : 3306
+        },
+        {
+          "name" : "PHPhotosErrorLimitExceeded",
+          "swiftName" : "limitExceeded",
+          "value" : 3307
         },
         {
           "name" : "PHPhotosErrorAccessRestricted",
@@ -3089,6 +3360,27 @@
     {
       "codes" : [
         {
+          "name" : "SALRegistrationErrorNotEligible",
+          "swiftName" : "notEligible",
+          "value" : 0
+        },
+        {
+          "name" : "SALRegistrationErrorFailed",
+          "swiftName" : "failed",
+          "value" : 1
+        },
+        {
+          "name" : "SALRegistrationErrorRateLimited",
+          "swiftName" : "rateLimited",
+          "value" : 2
+        }
+      ],
+      "domain" : "SALRegistrationErrorDomain",
+      "module" : "ServicesAccountLinking"
+    },
+    {
+      "codes" : [
+        {
           "name" : "SHErrorCodeInvalidAudioFormat",
           "swiftName" : "invalidAudioFormat",
           "value" : 100
@@ -3317,6 +3609,17 @@
     {
       "codes" : [
         {
+          "name" : "UIApplicationCategoryDefaultErrorRateLimited",
+          "swiftName" : "",
+          "value" : 1
+        }
+      ],
+      "domain" : "UIApplicationCategoryDefaultErrorDomain",
+      "module" : "UIKit"
+    },
+    {
+      "codes" : [
+        {
           "name" : "UIDocumentBrowserErrorGeneric",
           "swiftName" : "generic",
           "value" : 1
@@ -3405,6 +3708,82 @@
       ],
       "domain" : "UISceneErrorDomain",
       "module" : "UIKit"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "VTFrameProcessorUnknownError",
+          "swiftName" : "unknownError",
+          "value" : -19730
+        },
+        {
+          "name" : "VTFrameProcessorUnsupportedResolution",
+          "swiftName" : "unsupportedResolution",
+          "value" : -19731
+        },
+        {
+          "name" : "VTFrameProcessorSessionNotStarted",
+          "swiftName" : "sessionNotStarted",
+          "value" : -19732
+        },
+        {
+          "name" : "VTFrameProcessorSessionAlreadyActive",
+          "swiftName" : "sessionAlreadyActive",
+          "value" : -19733
+        },
+        {
+          "name" : "VTFrameProcessorFatalError",
+          "swiftName" : "fatalError",
+          "value" : -19734
+        },
+        {
+          "name" : "VTFrameProcessorSessionLevelError",
+          "swiftName" : "sessionLevelError",
+          "value" : -19735
+        },
+        {
+          "name" : "VTFrameProcessorInitializationFailed",
+          "swiftName" : "initializationFailed",
+          "value" : -19736
+        },
+        {
+          "name" : "VTFrameProcessorUnsupportedInput",
+          "swiftName" : "unsupportedInput",
+          "value" : -19737
+        },
+        {
+          "name" : "VTFrameProcessorMemoryAllocationFailure",
+          "swiftName" : "memoryAllocationFailure",
+          "value" : -19738
+        },
+        {
+          "name" : "VTFrameProcessorRevisionNotSupported",
+          "swiftName" : "revisionNotSupported",
+          "value" : -19739
+        },
+        {
+          "name" : "VTFrameProcessorProcessingError",
+          "swiftName" : "processingError",
+          "value" : -19740
+        },
+        {
+          "name" : "VTFrameProcessorInvalidParameterError",
+          "swiftName" : "invalidParameterError",
+          "value" : -19741
+        },
+        {
+          "name" : "VTFrameProcessorInvalidFrameTiming",
+          "swiftName" : "invalidFrameTiming",
+          "value" : -19742
+        },
+        {
+          "name" : "VTFrameProcessorAssetDownloadFailed",
+          "swiftName" : "assetDownloadFailed",
+          "value" : -19743
+        }
+      ],
+      "domain" : "VTFrameProcessorErrorDomain",
+      "module" : "VideoToolbox"
     },
     {
       "codes" : [
@@ -3512,14 +3891,215 @@
           "name" : "VZErrorNetworkBlockDeviceDisconnected",
           "swiftName" : "networkBlockDeviceDisconnected",
           "value" : 20002
+        },
+        {
+          "name" : "VZErrorUSBControllerNotFound",
+          "swiftName" : "usbControllerNotFound",
+          "value" : 30001
+        },
+        {
+          "name" : "VZErrorDeviceAlreadyAttached",
+          "swiftName" : "deviceAlreadyAttached",
+          "value" : 30002
+        },
+        {
+          "name" : "VZErrorDeviceInitializationFailure",
+          "swiftName" : "deviceInitializationFailure",
+          "value" : 30003
+        },
+        {
+          "name" : "VZErrorDeviceNotFound",
+          "swiftName" : "deviceNotFound",
+          "value" : 30004
         }
       ],
       "domain" : "VZErrorDomain",
       "module" : "Virtualization"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "WKWebExtensionContextErrorUnknown",
+          "swiftName" : "unknown",
+          "value" : 1
+        },
+        {
+          "name" : "WKWebExtensionContextErrorAlreadyLoaded",
+          "swiftName" : "alreadyLoaded",
+          "unspecified" : true,
+          "value" : 2
+        },
+        {
+          "name" : "WKWebExtensionContextErrorNotLoaded",
+          "swiftName" : "notLoaded",
+          "unspecified" : true,
+          "value" : 3
+        },
+        {
+          "name" : "WKWebExtensionContextErrorBaseURLAlreadyInUse",
+          "swiftName" : "baseURLAlreadyInUse",
+          "unspecified" : true,
+          "value" : 4
+        },
+        {
+          "name" : "WKWebExtensionContextErrorNoBackgroundContent",
+          "swiftName" : "noBackgroundContent",
+          "unspecified" : true,
+          "value" : 5
+        },
+        {
+          "name" : "WKWebExtensionContextErrorBackgroundContentFailedToLoad",
+          "swiftName" : "backgroundContentFailedToLoad",
+          "unspecified" : true,
+          "value" : 6
+        }
+      ],
+      "domain" : "WKWebExtensionContextErrorDomain",
+      "module" : "WebKit"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "WKWebExtensionDataRecordErrorUnknown",
+          "swiftName" : "unknown",
+          "value" : 1
+        },
+        {
+          "name" : "WKWebExtensionDataRecordErrorLocalStorageFailed",
+          "swiftName" : "localStorageFailed",
+          "unspecified" : true,
+          "value" : 2
+        },
+        {
+          "name" : "WKWebExtensionDataRecordErrorSessionStorageFailed",
+          "swiftName" : "sessionStorageFailed",
+          "unspecified" : true,
+          "value" : 3
+        },
+        {
+          "name" : "WKWebExtensionDataRecordErrorSynchronizedStorageFailed",
+          "swiftName" : "synchronizedStorageFailed",
+          "unspecified" : true,
+          "value" : 4
+        }
+      ],
+      "domain" : "WKWebExtensionDataRecordErrorDomain",
+      "module" : "WebKit"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "WKWebExtensionErrorUnknown",
+          "swiftName" : "unknown",
+          "value" : 1
+        },
+        {
+          "name" : "WKWebExtensionErrorResourceNotFound",
+          "swiftName" : "resourceNotFound",
+          "unspecified" : true,
+          "value" : 2
+        },
+        {
+          "name" : "WKWebExtensionErrorInvalidResourceCodeSignature",
+          "swiftName" : "invalidResourceCodeSignature",
+          "unspecified" : true,
+          "value" : 3
+        },
+        {
+          "name" : "WKWebExtensionErrorInvalidManifest",
+          "swiftName" : "invalidManifest",
+          "unspecified" : true,
+          "value" : 4
+        },
+        {
+          "name" : "WKWebExtensionErrorUnsupportedManifestVersion",
+          "swiftName" : "unsupportedManifestVersion",
+          "unspecified" : true,
+          "value" : 5
+        },
+        {
+          "name" : "WKWebExtensionErrorInvalidManifestEntry",
+          "swiftName" : "invalidManifestEntry",
+          "unspecified" : true,
+          "value" : 6
+        },
+        {
+          "name" : "WKWebExtensionErrorInvalidDeclarativeNetRequestEntry",
+          "swiftName" : "invalidDeclarativeNetRequestEntry",
+          "unspecified" : true,
+          "value" : 7
+        },
+        {
+          "name" : "WKWebExtensionErrorInvalidBackgroundPersistence",
+          "swiftName" : "invalidBackgroundPersistence",
+          "unspecified" : true,
+          "value" : 8
+        },
+        {
+          "name" : "WKWebExtensionErrorInvalidArchive",
+          "swiftName" : "invalidArchive",
+          "unspecified" : true,
+          "value" : 9
+        }
+      ],
+      "domain" : "WKWebExtensionErrorDomain",
+      "module" : "WebKit"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "WKWebExtensionMatchPatternErrorUnknown",
+          "swiftName" : "unknown",
+          "value" : 1
+        },
+        {
+          "name" : "WKWebExtensionMatchPatternErrorInvalidScheme",
+          "swiftName" : "invalidScheme",
+          "unspecified" : true,
+          "value" : 2
+        },
+        {
+          "name" : "WKWebExtensionMatchPatternErrorInvalidHost",
+          "swiftName" : "invalidHost",
+          "unspecified" : true,
+          "value" : 3
+        },
+        {
+          "name" : "WKWebExtensionMatchPatternErrorInvalidPath",
+          "swiftName" : "invalidPath",
+          "unspecified" : true,
+          "value" : 4
+        }
+      ],
+      "domain" : "WKWebExtensionMatchPatternErrorDomain",
+      "module" : "WebKit"
+    },
+    {
+      "codes" : [
+        {
+          "name" : "WKWebExtensionMessagePortErrorUnknown",
+          "swiftName" : "unknown",
+          "value" : 1
+        },
+        {
+          "name" : "WKWebExtensionMessagePortErrorNotConnected",
+          "swiftName" : "notConnected",
+          "unspecified" : true,
+          "value" : 2
+        },
+        {
+          "name" : "WKWebExtensionMessagePortErrorMessageInvalid",
+          "swiftName" : "messageInvalid",
+          "unspecified" : true,
+          "value" : 3
+        }
+      ],
+      "domain" : "WKWebExtensionMessagePortErrorDomain",
+      "module" : "WebKit"
     }
   ],
   "version" : {
-    "build" : "15C65",
-    "xcode" : "15.1"
+    "build" : "17F42",
+    "xcode" : "26.5"
   }
 }
