@@ -2,21 +2,19 @@ name: error-collector
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-
   build:
-
-    runs-on: macos-latest
+    runs-on: macos-26
 
     steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-    - uses: actions/cache@v5
-      with:
-        path: app/error-collector/.build
-        key: swift-${{ runner.os }}-build
-    - name: Build
-      run: cd app/error-collector && swift build
+      - uses: actions/checkout@v6
+      - uses: actions/cache@v5
+        with:
+          path: app/error-collector/.build
+          key: swift-${{ runner.os }}-build
+      - name: Build
+        run: cd app/error-collector && swift build

@@ -1,0 +1,57 @@
+name: Update errors.json
+
+on:
+  schedule:
+    - cron: "0 0 */10 * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: macos-26
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: Git settings
+        shell: bash
+        run: |
+          # https://qiita.com/thaim/items/3d1a4d09ec4a7d8844ce
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Select Xcode
+        shell: bash
+        run: |
+          # renovate-xcodereleases: runs-on=macos-26
+          sudo xcode-select --switch "/Applications/Xcode_26.5.app"
+      - name: Run error collector
+        run: |
+          cd app/error-collector && swift run error-collector --path $(xcode-select -p)/../../ -o ../../app/react-app/src/errors.json --pretty-print
+      - uses: ./.github/actions/detect-changes
+        id: errors_changes
+        with:
+          path: app/react-app/src/errors.json
+      - name: Push branch
+        if: steps.errors_changes.outputs.changed == 'true'
+        id: push_branch
+        run: |
+          git checkout -b update-errors-json
+          git add app/react-app/src/errors.json
+          git commit -m "Update errors.json"
+
+          if git ls-remote --exit-code origin "refs/heads/update-errors-json"; then
+            git push origin update-errors-json -f
+          else
+            git push origin update-errors-json
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Create pull request
+        if: steps.errors_changes.outputs.changed == 'true' && steps.push_branch.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "Update errors.json" \
+            --body "This PR updates the errors.json file with the latest error definitions." \
+            --base main \
+            --head update-errors-json
