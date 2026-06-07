@@ -1,0 +1,24 @@
+name: Detect Changes
+description: Detect file changes and expose result as output
+
+inputs:
+  path:
+    description: Target file path
+    required: true
+
+outputs:
+  changed:
+    description: Whether the file changed
+    value: ${{ steps.detect.outputs.changed }}
+
+runs:
+  using: composite
+  steps:
+    - id: detect
+      shell: bash
+      run: |
+        if [[ -n "$(git status --porcelain -- "${{ inputs.path }}")" ]]; then
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "changed=false" >> "$GITHUB_OUTPUT"
+        fi
