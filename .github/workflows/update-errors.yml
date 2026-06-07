@@ -13,6 +13,10 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/cache@v5
+        with:
+          path: app/error-collector/.build
+          key: swift-${{ runner.os }}-build
       - name: Git settings
         shell: bash
         run: |
