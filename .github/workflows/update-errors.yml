@@ -27,7 +27,7 @@ jobs:
         shell: bash
         run: |
           # renovate-xcodereleases: runs-on=macos-26
-          sudo xcode-select --switch "/Applications/Xcode_26.5.app"
+          sudo xcode-select --switch "/Applications/Xcode_26.6.app"
       - name: Run error collector
         run: |
           cd app/error-collector && swift run error-collector --path $(xcode-select -p)/../../ -o ../../app/react-app/src/errors.json --pretty-print
