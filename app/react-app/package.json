@@ -9,7 +9,7 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-ga4": "3.0.1",
-    "web-vitals": "6.2.1"
+    "web-vitals": "6.2.2"
   },
   "scripts": {
     "start": "vite",
