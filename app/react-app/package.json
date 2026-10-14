@@ -6,8 +6,8 @@
     "@emotion/react": "11.14.0",
     "@mantine/core": "9.7.2",
     "@mantine/hooks": "9.7.2",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "react-ga4": "3.0.1",
     "web-vitals": "6.2.3"
   },
